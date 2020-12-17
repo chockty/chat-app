@@ -11,12 +11,47 @@
 .side-header-bar {
   height: 100px;
   padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* リンクボタンを編集する際は、.クラス名 a で指定する必要がある。 */
+
+.header-name a {
+  font-size: 16px;
+  color: #fafafa;
+  text-decoration: none;
+}
+
+.create-room a {
+  color: deepskyblue;
+  border: 1px solid lightblue;
+  font-size: 10px;
+  padding: 14px;
+  text-decoration: none;
 }
 
 .rooms {
   background-color: #2F3E51;
   height: calc(100vh - 100px);
   padding: 0 20px;
+  overflow: scroll;
+}
+
+/* ここでroom と　room-name a で分ける理由は、
+room a　で要素を指定すると、「a」要素はインライン要素のため想定した画面にならない。
+上記、では「a」がまとめられて使用されているが、既に親要素の「side-header-bar」にて、
+display: flex;　のプロパティを適用されて横並びになっているためそのまま適用できる。
+*/
+
+.room {
+  padding: 20px 0 40px 0;
+}
+
+.room-name a {
+  color: white;
+  text-decoration: none;
 }
 
 .chat {
@@ -27,16 +62,112 @@
   background-color: #fff;
   height: 100px;
   padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ここでalign-items: center;　を使ってしまうと、
+配下の子要素のmarginが適用されなくなってしまう。
+*/
+
+.header-title {
+  font-size: 24px;
+  color: #333;
+  margin-top: 36px;
+}
+
+.header-button {
+  margin-top: 40px;
+}
+
+.header-button a {
+  color: darkred;
+  border: 1px solid darkred;
+  padding: 20px;
+  text-decoration: none;
 }
 
 .messages {
   background-color: #fafafa;
   height: calc(100vh - 190px);
   padding: 46px 40px 0 40px ; 
+  overflow: scroll;
+}
+
+.message {
+  margin-top: 10px;
+  /* margin-bottom: 40px; ここに入れてもOK*/
+}
+
+.upper-message {
+  display: flex;
+}
+
+.message-user {
+  font-size: 16px;
+  color: #434A54;
+}
+
+.message-date {
+  font-size: 12px;
+  color: #999;
+  padding-left: 10px;
+}
+
+.lower-message {
+  margin-top: 10px;
+}
+
+.message-content {
+  font-size: 14px;
+  color: #434A54;
+  margin-bottom: 40px;
 }
 
 .form {
   background-color: #dddddd;
   height: 90px;
   padding: 20px 40px;
+  display: flex;
 }
+
+.form-input {
+  background-color: white;
+  width: 100%;
+  display: flex;
+}
+
+.form-message {
+  width: 100%;
+  /* height: 100%; でもOK*/
+  height: 50px;
+  padding-left: 10px;
+  border: none;
+}
+
+.form-submit {
+  font-size: 16px;
+  /* height: 100%; でもOK*/
+  height: 50px;
+  color: white;
+  background-color: #38AEF0;
+  padding: 0 20px;
+  margin-left: 15px;
+  border: none;
+}
+
+.form-image {
+  font-size: 12px;
+  background-color: lightblue;
+  color: white;
+  padding: 12px;
+  width: 60px;
+  margin: 5px 10px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+
