@@ -28,13 +28,22 @@
     </div>
   </div>
 </div>
-<div class="form">
+
+<%# <div class="form"> %>
+<%= form_with model: [@room, @message], class: 'form', local: true do |f|  %>
   <div class="form-input">
-    <input type="text" placeholder="type a message" class="form-message">
+  <%= f.text_field :content, class: "form-message", placeholder: "type a message"%>
+  <%# <input type="text" placeholder="type a message" class="form-message"> %>
     <label class="form-image">
       <span class="image-file">画像</span>
-      <input type="file" class="hidden">
+      <%= f.file_field :file, class: "hidden" %>
+      <%# <input type="file" class="hidden"> %>
     </label>
   </div>
-  <input type="submit" name="commit" value="送信" class="form-submit">
-</div>
+  <%= f.submit "送信", class: "form-submit" %>
+  <% end %>
+  <%# <input type="submit" name="commit" value="送信" class="form-submit"> %>
+  <%# f.から始まるコードはその直下のhtmlコードをform_withに変換したもの。どうやらclassはそのまま使っているみたい %>
+<%# </div> %>
+
+
