@@ -1,0 +1,42 @@
+<div class='chat-room-form'>
+  <h1>新規チャットルーム</h1>
+  <%=form_with model: @room, local: true do |f|%>
+    <div class='chat-room-form__field'>
+      <div class='chat-room-form__field--left'>
+        <%= f.label :チャットルーム名, class: 'chat-room-form__label'%>
+      </div>
+      <div class='chat-room-form__field--right'>
+        <%= f.text_field :name, class: 'chat__room_name chat-room-form__input', placeholder: 'チャットルーム名を入力してください'%>
+      </div>
+    </div>
+    <div class='chat-room-form__field'>
+    </div>
+    <div class='chat-room-form__field'>
+      <div class='chat-room-form__field--left'>
+        <label class='chat-room-form__label' for='chat_room_チャットメンバー'>チャットメンバー</label>
+      </div>
+      <div class='chat-room-form__field--right'>
+        <select name="room[user_ids][]">
+        <%# room[user_ids][]とする理由：
+        ①今回チャットルームの作成に必要なのはログインユーザのidと選択したユーザのid
+        ②[user_ids][]とすることによって、submitされた際にuser_idsをキー：配列をバリューとしたハッシュがparamsに保存される。
+        ③②の[]にはログインユーザのidと選択したユーザのidが入る。
+         %>
+          <option>チャットするユーザーを選択してください</option>
+          <%= User.where.not(id: current_user.id).each do |user| %>
+            <option value=<%= user.id %>><%= user.name %></option>
+          <% end %>
+        </select>
+        <input type="hidden", name="room[user_ids][]", value=<%= current_user.id %>>
+        <%# わざわざ上記の1文を記載するのには、ログインユーザのidをroom[user_ids]に入れてsubmitするため。
+        この1文がないとログインユーザのidをsubmitできない。  %>
+      </div>
+    </div>
+    <div class='chat-room-form__field'>
+      <div class='chat-room-form__field--left'></div>
+      <div class='chat-room-form__field--right'>
+        <%= f.submit class: 'chat-room-form__action-btn'%>
+      </div>
+    </div>
+  <% end %>
+</div>
